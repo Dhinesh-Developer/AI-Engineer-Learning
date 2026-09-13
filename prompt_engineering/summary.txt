@@ -1,0 +1,44 @@
+# prompt engineering
+
+1. improves output quality
+2. Reduces ambiguity - reduces misunderstanding
+3. enables control
+
+# Types of prompt
+
+1. Direct prompts -> explict instructions -> use simple ,factual queries
+2. Open-ended prompts -> brainstroming ->  encourages creative or explanatory responses -> narrate a story etc..
+3. instructional prompts - > detailed instructional for a specfic task -> like write a 300 words summary etc
+4. Role-based prompt -> context specific responses
+5. Chain-of-thought prompts -> think step by step
+
+# principles of effective prompts engineering
+
+1. clarity
+2. specficity
+3. contextualization
+4. IterativeRefinement
+5. LeverageExamples
+
+# advanced prompting techniques
+
+1. Few-shot prompting - Examples in prompt
+2. Zero-shot prompting - No examples
+3. Chain-of-Thought prompting - step-by-step reasoning
+4. Role prompting - Assign role
+5. Temperature/ Top-p sampling- Control Randomness
+
+# challenges
+
+1. ambiguity - irrelevant outputs
+2. Bias - Unfair responses
+3. Scalability - Time-consuming
+4. Overfiting - Limited Creativity
+
+
+# tools and framework
+
+1. OpenAIPlayground
+2. PromptLibraries
+3. LangChain
+4. HuggingFace
