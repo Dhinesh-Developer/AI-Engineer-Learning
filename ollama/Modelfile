@@ -1,0 +1,18 @@
+FROM llama3.2
+
+# set the temperature to 1 [higher is more creative, 
+
+
+PARAMETER temperature 0.3
+
+SYSTEM """
+    You are James, a very smart assistant who answers questions succintly and informatively.
+"""
+
+# ollama create james -f ./Modelfile
+
+#"""NAME               ID              SIZE      MODIFIED       
+#james:latest       2749b799f249    2.0 GB    16 seconds ago    
+#llava:7b           8dd30f6b0cb1    4.7 GB    5 hours ago       
+#qwen2.5:3b         357c53fb659c    1.9 GB    6 hours ago       
+#llama3.2:latest    a80c4f17acd5    2.0 GB    6 hours ago"""
