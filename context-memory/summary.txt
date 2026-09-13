@@ -1,0 +1,38 @@
+
+what is context and memory management ?
+
+ ---- The way to make sure that the AI "remembers" previous context...
+
+1. Context -> information/state that's relevant to the current interaction
+2. Memory management -> The process of storing, retrieving and managing context over multiple interactions (for coherent and relevant responses) 
+
+
+Why it matters ? 
+ --- A way to make sure thatthe AI "remembers" previos context..
+
+ 1. coherence - relevant to the ongoing conversation
+ 2. personalization - Ai remembers user preferences, past interactions and other relevant details
+ 3. efficient - reduces reduancy
+
+# Key concepts 
+1. message history - > using the messages array [{role,content}]
+
+# persistant memory across sessions
+
+user input -> save conversation to file -> Load converations from file -> Generate response -> User
+
+
+# use cases
+
+1. chatbot and virtual assistant
+2. personalized recommendations - remembers user preferences 
+3. long term conversations
+
+
+# challenges
+
+1. context window limiations - limited token capacity
+2. summarization accuracy -> may lose crucial details
+3. memory persinstance -> storing and retrieving converations history is complicated
+
+
