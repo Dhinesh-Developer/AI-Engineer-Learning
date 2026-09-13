@@ -1,0 +1,66 @@
+
+# ollama -> open source model -> its free of cost -> download internally - lot of control is there
+
+What problems does it solve?
+1. Documents -> chunks -> embedding -> Gen LLM -> response  > for RAG
+
+1. privacy concerns -> lot of security.
+2. Easy to use -> setting up LLM;s can be very Easy
+3. Cost efficient -> no more cloud based services
+4. Latency reduction -> local execution reduces the latency issues
+5. Customization -> greater flexibility in customizing our models
+
+# key features
+
+1. Model management
+2. unified interface
+3. Extensibility
+4. preformance optimization
+
+# use cases
+
+1. Development and testing
+2. Education and research
+3. secure applications
+
+# system requirements
+
+->>> ollama.com
+1. OS: Mac, linux, windows
+2. Storage -> (at least - 10 GB free)
+3. Processor - Modern CPU
+
+# i have this model
+
+NAME               ID              SIZE      MODIFIED          
+llava:7b           8dd30f6b0cb1    4.7 GB    11 minutes ago       
+qwen2.5:3b         357c53fb659c    1.9 GB    About an hour ago    
+llama3.2:latest    a80c4f17acd5    2.0 GB    About an hour ago    
+
+# proccessed with the image..
+
+>>> what is in this image ./flower.png
+Added image './flower.png'
+ The image shows a bouquet of multicolored flowers, which appear to be hydrangeas or a similar type of flower. The flowers are in full bloom, with their 
+vibrant colors standing out against each other. The background is not distinctly visible, but it suggests a natural, outdoor setting. 
+
+>>> and now write me a short poem about that
+ A bouquet of blooms so true,
+
+With hues of purple, pink, and blue,
+
+Each petal and each leaf,
+
+Adds to the beauty, beneath and above.
+
+A splash of color, bright and bold,
+
+In the midst of nature's mould,
+
+Their fragrance fills the air,
+
+A sweet and gentle prayer.
+
+A symbol of love, so pure and fair,
+
+A bouquet of blooms, a sight to share. 
