@@ -1,0 +1,20 @@
+
+# Logging
+- the process of recording events, actions, and data during the execution of an application.
+
+Why?
+- helps developers understand what happended in the application - especillay when something goes wrong.
+
+1. Debugging and troubleshooting
+    - LLM's are complex systems (unpredictable)
+    - Logs help developers trace the flow of data, identify errors.
+2. Monitoring and performance
+    - Logs provides (response time, token usage, error rates)
+3. Compliance and auditing
+4. User experiment improvements
+5. Security            
+
+# Logging in LLM application
+
+User Reports Issue -> Developer Access Logs -> identify User input -> identify Model response -> identify errors or Anomalies -> Diagonse Issue -> Fix issue -> Improve application
+
