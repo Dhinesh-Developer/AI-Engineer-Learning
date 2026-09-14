@@ -1,0 +1,46 @@
+Retrival Augumented Generation - [query->context->response]
+
+# RAG - efficient way to customize an LLM (model) with your own data.
+
+# Key components
+
+-> retrival - identifies and retrives relevant documents
+-> generator - takes retrieved docs and the input query to generate coherent and contextually relevant response
+
+# The RAG Traid?
+Relevance = is the response relevant to the query?
+context Relevance = is the retrieved context relevant?
+Groudness = is the response supported by the context?
+
+
+# RAG vs Pure GENAI Models ? ???
+
+RAG -> retrival-generation  --> Accurate and context aware response
+GENAI -> GEneration only --> Potentailly inaccurate 
+
+
+# RAG overview
+
+query -> documents -> chunk1,chunk2....chunkn -> Embeddings LLM(Numeric forms) -> Emb1,emb2...Embn ->  Most similar -> Gen. LLM -> response
+
+
+# why RAG?
+1. enhanced accuracy
+2. Dynamic Knowledge
+3. scalability
+
+# pratical applications
+
+1. Question answering systems
+2. Search engine enhancement
+3. Document summarization
+4. Education and learning tools
+
+
+# challenges 
+
+1. Retrival Quality
+2. computaional costs
+3. integration complexity
+4. Bias in Knowledge base
+--------------------------------------------------------------------------------------------------------------------------

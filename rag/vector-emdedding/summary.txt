@@ -1,0 +1,82 @@
+Vector database and Embeddings
+
+### Vector Database
+-  a vector database encodes information as vectors in a multi-dimensional space to perform high-efficent queries based on similarity.
+    [vector - dimensionality - similarity search]
+
+1. Vector -> Direction {toward direction} -> Magnitude -> distance
+
+### Why? 
+
+80% or more data is unstructed - contains images,videos,text,audio,files etc.. ->  tunred into -> vectors [-223.23. 0.56]
+
+1. efficient representation of complex data
+2. Enabling similarity search
+3. Leveraging Machine Learing Models
+4. Optimizing performance and scalability
+5. Improving user experience
+
+### Traditional databases 
+    [RDBMS] - Key characteristics
+ 
+            1.structured data : predefined columns and rows
+            2.Schema-based : database structure must be defined before hand.
+            3.data Manipulation and queries
+            4.ACID compilant 
+            5. indexing
+    Query -> Database -> index[keys-hashfunction-hashes] -> response
+
+    Limiations:
+        1. Scalability
+        2. flexibility
+        3. Handling unstructed Data
+        
+
+## Embeddings vs vectors -> refers to the same thing [embeddings are vectors, not all vectors are embeddings]
+
+1. vectors -> are generic and used for a wide array of applications (handle numerival computations)
+2. Embeddings -> map raw data into a vector space (preserves semantic relationships- meaning)
+
+
+### Vector database use cases : 
+
+1. image retrieval & similarity search
+2. recommendation systems
+3. Natural lanuguage processing
+4. Fraud detection
+5. BioFormatics
+
+
+## The top 5 vector databases
+1. pinecone:
+    - managed service, supports real time vector indexing and query 
+    - provide a simple API
+2. milvus:
+    - open source - designed for high performance 
+    - supports - CPU and GPU
+    - Highly customize
+    - spports API and SDK
+3. Faiss:
+    - efficent similarity search
+    - fast data retrieval
+    - higly Optimized algorithms
+    - research and developers in AI
+4. Chroma:
+    - open source
+    - stored embedding storage and storage- wide range of supported
+    - high performance and scalability
+    - simplicity
+    - customizable and extensible
+    - cost efficent and free
+5. Weaviate:
+    - Open source -> supports - GraphQl, REstful API
+    - semantic search, automatic classficaion and object recognition
+    - modular infrastructure
+6. Annoy:
+    - Lightweight, open source- fast
+    - High performance , large scale dataset
+    - speed and memory efficent   
+    - minimal setup 
+
+
+
