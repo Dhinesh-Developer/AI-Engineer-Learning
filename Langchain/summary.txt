@@ -1,0 +1,38 @@
+LLM framework
+
+# Langchain - the llm framework
+
+1. Langchain
+2. LlamaIndex
+3. HayStack
+
+### Langchain
+ - A open source framework for building applications that leverage various LLM's (having external sources of data) combined with various LLM'source
+
+key components
+1. models - Wrapper for various models (LLM) like openai, embedding models, chat
+2. prompts - Reusable prompt templates, Few-shot learning
+3. Chains - sequetional chains, custom chains
+4. Memory - short-term memory, long-term memory
+5. Tools - external APIs integration, Databased
+6. Agents - Autonomous systems
+
+## Prompt templates
+- are a concept in langchain designed to assist with this transformation. They take in raw user input and return data (a prompt) that is ready to pass into a language model.
+
+## data preparation
+
+- Raw data - Document loader - Text splitters - Text chunks - embeddings - vector store
+
+1. indexing - Data structure that organize documents for efficient retrival.[vector store index[FAISS, Pinecone,chroma],list index, sql index, graph index, ]
+2. Retrivers - Finders of relevant documents based on query 
+
+
+
+
+
+
+
+
+
+
