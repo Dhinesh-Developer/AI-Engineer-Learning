@@ -1,7 +1,10 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain_ollama import OllamaEmbeddings
 import os
 import re
+import pprint
 
 # Load the document
 loader = TextLoader(
@@ -12,7 +15,7 @@ loader = TextLoader(
 documents = loader.load()
 
 # Print loaded documents
-print(documents)
+# print(documents)
 
 
 # Data cleaning function
@@ -30,18 +33,43 @@ def clean_text(text):
 
     return text
 
-document = loader.load()
-
-cleaned_documents = [clean_text(doc.page_content) for doc in document]
-
-print(cleaned_documents)
-
-
 # splitting the text into characters
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-texts = text_splitter.split_documents(documents)
+chunks = text_splitter.split_documents(documents)
 
-texts = [clean_text(text.page_content) for text in texts]
-print(texts)
+texts = [clean_text(chunk.page_content) for chunk in chunks]
 
+# FAISS expects an Embeddings implementation, not the response from ollama.embed().
+embeddings = OllamaEmbeddings(model="embeddinggemma")
 
+# `texts` contains strings, so use from_texts rather than from_documents.
+retriever = FAISS.from_texts(texts, embedding=embeddings).as_retriever(search_kwargs={"k":3}) # k=3 means 3 documents
+
+# query
+query = "what did Martin Luther King Jr. dream about?"
+
+docs = retriever.invoke(query)
+
+pprint.pprint(f" => DOCSL {docs}: ")
+
+# Output
+# (" => DOCSL [Document(id='455f6dcf-dd21-4d26-958d-d2715fea2dbb', metadata={}, "
+#  "page_content='i have a dream martin luther king jr august martin luther king "
+#  'jr delivered his famous i have a dream speech during the march on washington '
+#  'for jobs and freedom on august the speech called for an end to racism and '
+#  'demanded civil and economic rights for african americans king described his '
+#  'vision of a future in which people would be judged by their character rather '
+#  "than by the color of their skin'), "
+#  "Document(id='389088f3-4415-4085-8b0a-275e8f1a4fea', metadata={}, "
+#  "page_content='king spoke about freedom equality justice and hope he "
+#  'emphasized that the struggle for civil rights required determination and '
+#  'peaceful action he described a dream in which former slaves and the '
+#  'descendants of former slave owners could sit together in brotherhood he '
+#  "imagined a country where freedom would be available to everyone'), "
+#  "Document(id='0f784a9e-2403-4480-bc45-aa9b57acaffc', metadata={}, "
+#  "page_content='the speech became one of the most important speeches in "
+#  'american history its message continues to influence discussions about '
+#  'equality civil rights justice and human dignity the central ideas of the '
+#  'speech include equality for all people freedom from racial discrimination '
+#  'justice and equal opportunities peaceful resistance against injustice hope '
+#  "for a better future brotherhood among people of different backgrounds')]: ")
