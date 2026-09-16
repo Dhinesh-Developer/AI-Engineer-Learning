@@ -14,21 +14,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-# ============================================================
-# CONFIGURATION
-# ============================================================
-
 LLM_MODEL = "qwen2.5:3b"
 
-# `embeddinggemma` can cause older/incompatible GPU backends in the local
-# Ollama server to abort.  Use the small, well-supported embedding model by
-# default and allow an override without changing this script.
 EMBEDDING_MODEL = os.getenv("OLLAMA_EMBEDDING_MODEL", "nomic-embed-text")
-
-# A native Ollama crash cannot be caught by Python.  CPU embeddings are slower,
-# but avoid GPU-driver/model-runner crashes.  Set this to a positive GPU count
-# (or set OLLAMA_EMBEDDING_NUM_GPU) only after CPU embeddings work.
 EMBEDDING_NUM_GPU = int(os.getenv("OLLAMA_EMBEDDING_NUM_GPU", "0"))
 
 
@@ -39,12 +27,6 @@ URLS = [
     "https://beebom.com/how-open-port-linux/",
     "https://beebom.com/linux-vs-windows/",
 ]
-
-
-# ============================================================
-# 1. SCRAPE DOCUMENTS
-# ============================================================
-
 def scrape_documents(urls: List[str]):
     """
     Load web pages using SeleniumURLLoader.
@@ -55,22 +37,15 @@ def scrape_documents(urls: List[str]):
     print("=" * 60)
 
     try:
-
         loader = SeleniumURLLoader(urls=urls)
-
         documents = loader.load()
-
         print(f"\nSuccessfully loaded: {len(documents)} documents")
-
-        for i, document in enumerate(documents, start=1):
-
+        for i,document in enumerate(documents, start=1):
             source = document.metadata.get(
                 "source",
                 "Unknown source"
             )
-
             content_length = len(document.page_content)
-
             print(
                 f"{i}. {source} "
                 f"({content_length} characters)"
@@ -85,10 +60,6 @@ def scrape_documents(urls: List[str]):
 
         return []
 
-
-# ============================================================
-# 2. SPLIT DOCUMENTS
-# ============================================================
 
 def split_documents(documents) -> Tuple[List[str], List[Dict]]:
 
@@ -112,61 +83,43 @@ def split_documents(documents) -> Tuple[List[str], List[Dict]]:
     metadatas = []
 
     for document in documents:
-
         text = document.page_content
-
         source = document.metadata.get(
             "source",
             "Unknown"
         )
-
         chunks = text_splitter.split_text(text)
 
         for chunk in chunks:
-
             if chunk.strip():
-
                 texts.append(chunk)
-
                 metadatas.append({
                     "source": source
                 })
 
     print(f"\nCreated {len(texts)} chunks")
-
     return texts, metadatas
-
-
-# ============================================================
-# 3. TEST EMBEDDING MODEL
-# ============================================================
 
 def test_embedding_model():
 
     print("\n" + "=" * 60)
     print("TESTING EMBEDDING MODEL")
     print("=" * 60)
-
     print(f"Model: {EMBEDDING_MODEL}")
 
     try:
-
         embeddings = OllamaEmbeddings(
             model=EMBEDDING_MODEL,
             num_gpu=EMBEDDING_NUM_GPU,
             validate_model_on_init=True,
         )
-
         test_text = [
             "This is a test sentence for embeddings."
         ]
-
         vectors = embeddings.embed_documents(
             test_text
         )
-
         print("\nEmbedding test successful!")
-
         print(
             f"Embedding dimension: {len(vectors[0])}"
         )
@@ -176,7 +129,6 @@ def test_embedding_model():
     except Exception as e:
 
         print("\nEmbedding model FAILED.")
-
         print("\nError:")
         print(e)
 
@@ -192,11 +144,6 @@ def test_embedding_model():
         )
 
         raise
-
-
-# ============================================================
-# 4. CREATE CHROMA VECTOR STORE
-# ============================================================
 
 def create_vector_store(
     texts: List[str],
@@ -227,11 +174,6 @@ def create_vector_store(
         print(e)
 
         raise
-
-
-# ============================================================
-# 5. CREATE QA CHAIN
-# ============================================================
 
 def setup_qa_chain(db):
 
@@ -268,18 +210,12 @@ Do not invent information.
 Keep the answer clear, concise, and useful.
 
 ### Context
-
 {context}
-
 ### Question
-
 {question}
-
 ### Answer
 """
     )
-
-    # RAG chain
     chain = (
         {
             "context": retriever,
@@ -291,13 +227,7 @@ Keep the answer clear, concise, and useful.
     )
 
     print("QA chain ready.")
-
     return chain, retriever
-
-
-# ============================================================
-# 6. PROCESS QUERY
-# ============================================================
 
 def process_query(
     chain,
@@ -309,14 +239,10 @@ def process_query(
 
         # Generate answer
         answer = chain.invoke(query)
-
         # Retrieve source documents
         documents = retriever.invoke(query)
-
         sources = []
-
         for document in documents:
-
             source = document.metadata.get(
                 "source",
                 "Unknown"
@@ -340,70 +266,38 @@ def process_query(
             "sources": []
         }
 
-
-# ============================================================
-# 7. MAIN
-# ============================================================
-
 def main():
 
     print("\n")
     print("=" * 60)
     print("WEB RAG ASSISTANT")
     print("=" * 60)
-
-    # --------------------------------------------------------
-    # Step 1: Test embedding model FIRST
-    # --------------------------------------------------------
-
     embeddings = test_embedding_model()
-
-    # --------------------------------------------------------
-    # Step 2: Scrape web pages
-    # --------------------------------------------------------
-
     documents = scrape_documents(URLS)
 
     if not documents:
-
         print("\nNo documents were loaded.")
-
         return
-
-    # --------------------------------------------------------
-    # Step 3: Split documents
-    # --------------------------------------------------------
 
     texts, metadatas = split_documents(
         documents
     )
 
     if not texts:
-
         print("\nNo text chunks were created.")
-
         return
 
-    # --------------------------------------------------------
-    # Step 4: Create vector database
-    # --------------------------------------------------------
-
+    
     db = create_vector_store(
         texts,
         metadatas,
         embeddings
     )
 
-    # --------------------------------------------------------
-    # Step 5: Create RAG chain
-    # --------------------------------------------------------
-
+    
     chain, retriever = setup_qa_chain(db)
 
-    # --------------------------------------------------------
-    # Step 6: Interactive loop
-    # --------------------------------------------------------
-
+    
     print("\n" + "=" * 60)
     print("RAG ASSISTANT READY")
     print("=" * 60)
@@ -447,10 +341,6 @@ def main():
 
                 print(f"- {source}")
 
-
-# ============================================================
-# ENTRY POINT
-# ============================================================
 
 if __name__ == "__main__":
     main()

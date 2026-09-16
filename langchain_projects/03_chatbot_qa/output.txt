@@ -1,0 +1,96 @@
+
+============================================================
+WEB RAG ASSISTANT
+============================================================
+
+============================================================
+TESTING EMBEDDING MODEL
+============================================================
+Model: nomic-embed-text
+
+Embedding test successful!
+Embedding dimension: 768
+
+============================================================
+SCRAPING DOCUMENTS
+============================================================
+
+Successfully loaded: 5 documents
+1. https://beebom.com/what-is-nft-explained/ (12284 characters)
+2. https://beebom.com/how-delete-servers-discord/ (9270 characters)
+3. https://beebom.com/how-list-groups-linux/ (2674 characters)
+4. https://beebom.com/how-open-port-linux/ (5409 characters)
+5. https://beebom.com/linux-vs-windows/ (12758 characters)
+
+============================================================
+SPLITTING DOCUMENTS
+============================================================
+
+Created 72 chunks
+
+============================================================
+CREATING CHROMA VECTOR STORE
+============================================================
+
+Chroma vector store created successfully.
+
+============================================================
+SETTING UP QA CHAIN
+============================================================
+QA chain ready.
+
+============================================================
+RAG ASSISTANT READY
+============================================================
+
+Type 'quit' to exit.
+
+Enter your question: how to open port in linux
+
+------------------------------------------------------------
+ANSWER
+------------------------------------------------------------
+To open a port in Linux, you can use several methods depending on your Linux distribution. Here are some common methods:
+
+1. **Ubuntu-based Systems (like Ubuntu, Kubuntu, etc.)**:
+   - Use UFW (Uncomplicated Firewall) to add a new rule to open the port.
+   - Example command: `sudo ufw allow <port_number>/<protocol>`.
+   - For example, to open port 8080 for incoming TCP connections, use: `sudo ufw allow 8080/tcp`.
+   - After adding the rule, check the status of UFW using: `sudo ufw status numbered`.
+   - If UFW is disabled, enable it with: `sudo ufw enable`.
+
+2. **CentOS-based Systems (like CentOS, RHEL, Fedora, etc.)**:
+   - Use Firewalld to add a new rule to open a port specific to a protocol.
+   - Example command: `sudo firewall-cmd --add-port=<port_number>/<protocol>`.
+   - For example, to open port 8080 for incoming TCP connections, use: `sudo firewall-cmd --add-port=8080/tcp`.
+   - Before modifying any rules, check the status of Firewalld using: `sudo systemctl status firewalld`.
+   - If Firewalld is inactive, activate it using: `sudo systemctl enable firewalld`.
+
+3. **Other Linux Distributions**:
+   - Use iptables to allow TCP traffic on a specific port.
+   - Example command: `sudo iptables -A INPUT -p tcp --dport <port_number> -j ACCEPT`.
+   - For example, to open port 8080 for incoming TCP connections, use: `sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT`.
+   - After adding the rule, save it using: `sudo /sbin/iptables-save`.
+
+Make sure to replace `<port_number>` and `<protocol>` with the appropriate values for your use case.
+
+------------------------------------------------------------
+SOURCES
+------------------------------------------------------------
+- https://beebom.com/how-open-port-linux/
+
+Enter your question: what is nft
+
+------------------------------------------------------------
+ANSWER
+------------------------------------------------------------
+NFT stands for Non-fungible Token. It is an incorruptible digital token that can be easily traded on a blockchain network. Essentially, NFT is a certificate of ownership or authenticity, unique to the item it represents.
+
+------------------------------------------------------------
+SOURCES
+------------------------------------------------------------
+- https://beebom.com/what-is-nft-explained/
+
+Enter your question: quit
+
+Goodbye!
