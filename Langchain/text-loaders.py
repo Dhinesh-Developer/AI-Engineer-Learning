@@ -46,11 +46,37 @@ embeddings = OllamaEmbeddings(model="embeddinggemma")
 retriever = FAISS.from_texts(texts, embedding=embeddings).as_retriever(search_kwargs={"k":3}) # k=3 means 3 documents
 
 # query
-query = "what did Martin Luther King Jr. dream about?"
+# query = "what did Martin Luther King Jr. dream about?"
+query = "give me a summary of the speech in 5 bullet points?"
 
 docs = retriever.invoke(query)
 
-pprint.pprint(f" => DOCSL {docs}: ")
+# pprint.pprint(f" => DOCSL {docs}: ")
+
+
+# Chat with the model and our docs
+
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
+from langchain_core.output_parsers import StrOutputParser
+
+# create the chat prompt
+prompt = ChatPromptTemplate.from_template(
+    "Please use the following docs {docs}, and answer the following question {query}"
+)
+
+model = ChatOllama(model="qwen2.5:3b")
+chain = prompt | model | StrOutputParser()
+response = chain.invoke({"docs": docs, "query":query})
+print(f"Response: {response}")
+
+# Response: Martin Luther King Jr. dreamt of a future where everyone is judged based on their character rather than the color of their skin. He envisioned a world where people, particularly African Americans, would no longer face racial discrimination. King's dream also encompassed a society where freedom is available to everyone, and where justice and equal opportunities are guaranteed for all, irrespective of their background. He highlighted a vision where former slaves and their descendants could live side by side in brotherhood. Additionally, King emphasized the importance of peaceful resistance against injustice and his message continues to inspire discussions about equality, civil rights, justice, and human dignity, fostering a belief in a better future where different people can live in harmony.
+
+# Response: - The speech is remembered not only for its historical significance but also as a powerful example of leadership courage and hope.
+# - It became one of the most important speeches in American history, influencing discussions on equality, civil rights, justice, and human dignity.
+# - It emphasizes the equality of all people and the freedom from racial discrimination.
+# - King demanded civil and economic rights for African Americans.
+# - King envisioned a future where people would be judged by their character rather than by the color of their skin, symbolizing a more inclusive and just society.
 
 # Output
 # (" => DOCSL [Document(id='455f6dcf-dd21-4d26-958d-d2715fea2dbb', metadata={}, "
