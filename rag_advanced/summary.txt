@@ -1,0 +1,29 @@
+RAG Traid = Retrival Augmented Generation
+query - context - response
+
+components of RAG
+- Retriver - identifies and Retrivers relevant documents
+- Generator - Takes Retrived docs and the input query to generate coherent and contextually relevant response.
+
+RAG - Efficent way to customize our model with own data
+
+## Naive RAG
+- indexing - cleaning, extracting data from docs
+- Retrival
+- Generation
+
+docs[parsing+preprocessing] -> parsed docs[chunking] -> Embedding model[vectorize] -> indexing[vector store] 
+user[query] -> embedding model -> vectorize -> search -> vector store -> Retrive -> relevant docs[prompt] -> Gen LLM 
+
+## NAive RAG Challenges
+1. Limited contextual understanding
+2. Inconsistent relevance and quality of Retrived documents
+3. poor integration between Retrival and Generation
+
+# Advanced RAG Techniques
+1. Query Expansion (with multiple queries)
+    - Exploring data analysis
+    - Academic research
+    - Customer support
+    - Healthcare information systems
+2. 
