@@ -26,4 +26,20 @@ user[query] -> embedding model -> vectorize -> search -> vector store -> Retrive
     - Academic research
     - Customer support
     - Healthcare information systems
-2. 
+
+2. Bi-Encoder
+
+This is extremely important.
+A bi-encoder independently converts the query and documents into embeddings. 
+Sentence Transformers describes these models as efficient fixed-size embedding generators suitable for semantic search.
+
+3. Cross encoder
+
+Sentence Transformers notes that cross-encoders generally give stronger pairwise relevance scoring but are slower because each query-document pair must be evaluated
+
+
+
+
+
+
+
