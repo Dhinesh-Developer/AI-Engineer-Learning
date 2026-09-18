@@ -1,0 +1,35 @@
+                         USER
+                           │
+                           ▼
+                    Streamlit UI
+                           │
+                           ▼
+                     Agent.run()
+                           │
+                           ▼
+                    Ollama LLM
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                No tool        Tool call
+                    │             │
+                    │             ▼
+                    │        Tool Executor
+                    │             │
+                    │       ┌─────┼─────┐
+                    │       ▼     ▼     ▼
+                    │   Calculator Notes Time
+                    │       │     │     │
+                    │       └─────┼─────┘
+                    │             ▼
+                    │        Tool Result
+                    │             │
+                    │             ▼
+                    │           Ollama
+                    │             │
+                    └─────────────┤
+                                  ▼
+                             Final Answer
+                                  │
+                                  ▼
+                             Streamlit
