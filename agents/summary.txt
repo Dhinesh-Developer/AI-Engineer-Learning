@@ -1,0 +1,14 @@
+
+
+# Key charactersistics
+
+1. Autonomy
+- Learning and adpation
+- interaction
+- Goal-driven
+
+# Use cases.
+ - customer service chatbots
+ - personal assistants
+ - Data analysis
+ - Smart home systems.
