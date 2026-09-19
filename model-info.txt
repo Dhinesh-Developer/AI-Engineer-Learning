@@ -1,0 +1,22 @@
+| Provider   | Model                          | Text |       Image       |       Audio      | Video | Tool Calling | Best learning use              |
+| ---------- | ------------------------------ | :--: | :---------------: | :--------------: | :---: | :----------: | ------------------------------ |
+| **Groq**   | `openai/gpt-oss-20b`           |   ✅  |         ❌         |         ❌        |   ❌   |       ✅      | **Main Agent/LangGraph model** |
+| **Groq**   | `openai/gpt-oss-120b`          |   ✅  |         ❌         |         ❌        |   ❌   |       ✅      | Complex agents/reasoning       |
+| **Groq**   | `qwen/qwen3.6-27b`             |   ✅  |         ✅         |         ❌        |   ❌   |       ✅      | **Vision + agents**            |
+| **Groq**   | `qwen/qwen3.8-27b`             |   ✅  |         ✅         |         ❌        |   ❌   |       ✅      | Vision + reasoning             |
+| **Groq**   | `whisper-large-v3`             |   ❌  |         ❌         |     **Input**    |   ❌   |       ❌      | **Speech → Text**              |
+| **Groq**   | `whisper-large-v3-turbo`       |   ❌  |         ❌         |     **Input**    |   ❌   |       ❌      | Fast speech → Text             |
+| **Gemini** | `gemini-3.8-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | **Main multimodal Agent**      |
+| **Gemini** | `gemini-3.7-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Agentic workflows              |
+| **Gemini** | `gemini-3.6-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Multimodal applications        |
+| **Gemini** | `gemini-3.1-pro-preview`       |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Complex reasoning              |
+| **Gemini** | `gemini-3.5-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Fast general multimodal        |
+| **Gemini** | `gemini-3.5-flash-lite`        |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Lightweight/high-volume        |
+| **Gemini** | `gemini-2.5-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | **Excellent learning model**   |
+| **Gemini** | `gemini-2.5-pro`               |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Complex RAG/reasoning          |
+| **Gemini** | `gemini-3.1-flash-image`       | Text | **Generate/Edit** |         ❌        |   ❌   |       —      | Image generation/editing       |
+| **Gemini** | `gemini-3-pro-image`           | Text | **Generate/Edit** |         ❌        |   ❌   |       —      | Advanced image generation      |
+| **Gemini** | `gemini-3.5-transcribe`        |   ❌  |         ❌         |     **Input**    |   ❌   |       —      | **Speech → Text**              |
+| **Gemini** | `gemini-3.8-live`              |   ✅  |         ✅         | **Input/Output** |   ✅   |       ✅      | **Real-time voice agents**     |
+| **Gemini** | `gemini-3.1-flash-tts-preview` | Text |         ❌         |    **Output**    |   ❌   |       —      | **Text → Speech**              |
+| **Gemini** | `gemini-embedding-2-preview`   |   ✅  |         ✅         |         ✅        |   ✅   |       —      | **Multimodal RAG / Vector DB** |

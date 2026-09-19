@@ -211,52 +211,26 @@ class PersonalAgent:
     def __init__(self):
         self.model = MODEL_NAME
         self.messages = [
-            {
-                "role": "system",
-                "content": SYSTEM_PROMPT
-            }
-
+            {"role": "system","content": SYSTEM_PROMPT}
         ]
-
     def run(self, user_input):
-        """
-        Run the complete agent loop.
-
-        Returns:
-            final_answer, execution_trace
-        """
-
         self.messages.append(
-            {
-                "role": "user",
-                "content": user_input
-            }
+            {"role": "user","content": user_input}
         )
-
         execution_trace = []
-        for step in range(
-            MAX_AGENT_STEPS
-        ):
+        for step in range(MAX_AGENT_STEPS):
             response = ollama.chat(
                 model=self.model,
                 messages=self.messages,
                 tools=TOOLS
             )
-
             assistant_message = response["message"]
-            self.messages.append(
-                assistant_message
-            )
-
-            tool_calls = assistant_message.get(
-                "tool_calls"
-            )
+            self.messages.append(assistant_message)
+            tool_calls = assistant_message.get("tool_calls")
 
             if not tool_calls:
                 final_answer = assistant_message.get(
-                    "content",
-                    ""
-                )
+                    "content", "")
                 return (
                     final_answer,
                     execution_trace
