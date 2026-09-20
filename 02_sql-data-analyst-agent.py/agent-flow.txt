@@ -1,0 +1,26 @@
+START
+  ↓
+get_schema
+  ↓
+generate_sql
+  ↓
+execute_sql
+  ↓
+ ┌──────────────────────┐
+ │ Did SQL succeed?     │
+ └──────────┬───────────┘
+            │
+       ┌────┴────┐
+       │         │
+      YES        NO
+       │         │
+       ↓         ↓
+ generate     repair_sql
+ insights        │
+       ↑         │
+       │         ↓
+       │     execute_sql
+       │         │
+       └─────────┘
+            ↓
+          END
