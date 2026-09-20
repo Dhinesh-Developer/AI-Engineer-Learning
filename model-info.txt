@@ -1,22 +1,40 @@
-| Provider   | Model                          | Text |       Image       |       Audio      | Video | Tool Calling | Best learning use              |
-| ---------- | ------------------------------ | :--: | :---------------: | :--------------: | :---: | :----------: | ------------------------------ |
-| **Groq**   | `openai/gpt-oss-20b`           |   ✅  |         ❌         |         ❌        |   ❌   |       ✅      | **Main Agent/LangGraph model** |
-| **Groq**   | `openai/gpt-oss-120b`          |   ✅  |         ❌         |         ❌        |   ❌   |       ✅      | Complex agents/reasoning       |
-| **Groq**   | `qwen/qwen3.6-27b`             |   ✅  |         ✅         |         ❌        |   ❌   |       ✅      | **Vision + agents**            |
-| **Groq**   | `qwen/qwen3.8-27b`             |   ✅  |         ✅         |         ❌        |   ❌   |       ✅      | Vision + reasoning             |
-| **Groq**   | `whisper-large-v3`             |   ❌  |         ❌         |     **Input**    |   ❌   |       ❌      | **Speech → Text**              |
-| **Groq**   | `whisper-large-v3-turbo`       |   ❌  |         ❌         |     **Input**    |   ❌   |       ❌      | Fast speech → Text             |
-| **Gemini** | `gemini-3.8-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | **Main multimodal Agent**      |
-| **Gemini** | `gemini-3.7-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Agentic workflows              |
-| **Gemini** | `gemini-3.6-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Multimodal applications        |
-| **Gemini** | `gemini-3.1-pro-preview`       |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Complex reasoning              |
-| **Gemini** | `gemini-3.5-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Fast general multimodal        |
-| **Gemini** | `gemini-3.5-flash-lite`        |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Lightweight/high-volume        |
-| **Gemini** | `gemini-2.5-flash`             |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | **Excellent learning model**   |
-| **Gemini** | `gemini-2.5-pro`               |   ✅  |         ✅         |         ✅        |   ✅   |       ✅      | Complex RAG/reasoning          |
-| **Gemini** | `gemini-3.1-flash-image`       | Text | **Generate/Edit** |         ❌        |   ❌   |       —      | Image generation/editing       |
-| **Gemini** | `gemini-3-pro-image`           | Text | **Generate/Edit** |         ❌        |   ❌   |       —      | Advanced image generation      |
-| **Gemini** | `gemini-3.5-transcribe`        |   ❌  |         ❌         |     **Input**    |   ❌   |       —      | **Speech → Text**              |
-| **Gemini** | `gemini-3.8-live`              |   ✅  |         ✅         | **Input/Output** |   ✅   |       ✅      | **Real-time voice agents**     |
-| **Gemini** | `gemini-3.1-flash-tts-preview` | Text |         ❌         |    **Output**    |   ❌   |       —      | **Text → Speech**              |
-| **Gemini** | `gemini-embedding-2-preview`   |   ✅  |         ✅         |         ✅        |   ✅   |       —      | **Multimodal RAG / Vector DB** |
+Now let me check Ollama's current popular models list.Here's a solid set for building agentic AI projects in VS Code — picked to cover text, vision/document, audio, and embeddings across all three ecosystems.
+
+## Google GenAI (`google-genai` SDK — Gemini API)
+
+| Model | Modalities | Why it's good for you |
+|---|---|---|
+| `gemini-3-flash-preview` (or GA `gemini-3.5-flash`) | text, image, video, audio input | Google's newest Flash generation, roughly 4x faster on output tokens than comparable frontier models, and it's the default model in most current agent-building docs — great all-round agent "brain" |
+| `gemini-3.1-flash-lite` | text, image, video, audio | Stable since 7 May 2026, cheapest tier — ideal for high-volume experimentation on a student budget/free tier |
+| `gemini-3.1-pro-preview` | text, image, video, audio, long context (1M tokens) | Strongest pure-reasoning model, ~94.3% on GPQA Diamond — use for complex multi-step agent planning where Flash makes mistakes |
+| `gemini-embedding-2-preview` | text, image, video, audio, PDFs → single vector space | Google's first multimodal embedding model, best for cross-modal semantic search, document retrieval, and recommendation systems — perfect for a RAG agent project |
+| `gemini-3.1-flash-image` (Nano Banana 2) | image generation/editing | GA native image model, released 28 May 2026, useful if your project needs an image-generation tool the agent can call |
+
+For document extraction specifically, Google's **File Search tool** (built on `gemini-embedding-2`) is worth using directly rather than rolling your own pipeline — it's fully managed, with no vector database to provision, and gives built-in citations linking answers to specific documents and pages.
+
+## Groq (ultra-fast inference, OpenAI-compatible API)
+
+| Model | Modality | Why it's good for you |
+|---|---|---|
+| `llama-3.3-70b-versatile` | text | The standard high-quality "agent brain" on Groq — runs at LPU speed (1000+ tokens/sec), so your agent loops feel instant while you debug |
+| `llama-3.1-8b-instant` | text | Cheap, very fast — good for simple sub-agents (routing, classification, tool-selection steps) inside a multi-agent pipeline |
+| `openai/gpt-oss-120b` | text, reasoning + tool calls | OpenAI's flagship open-weight model, 120B parameters, with built-in browser search, code execution, and reasoning — closest thing to a "deep agent" reasoning model on Groq |
+| `openai/gpt-oss-20b` | text, reasoning | Compact open-weight model with the same built-in search/code-execution/reasoning capabilities at lower cost — good for iterating quickly |
+| `whisper-large-v3` (or `-turbo`) | audio → text | For any voice-driven agent feature (transcribe user speech, then hand off to the LLM); supports files up to 100 MB |
+
+Groq doesn't currently offer embedding models, so pair it with Gemini's embeddings, `nomic-embed-text` on Ollama, or a free SentenceTransformers model for the RAG part of your project.
+
+## Ollama (local, free, runs on your own laptop)
+
+| Model | Modality | Why it's good for you |
+|---|---|---|
+| `llama3.2:3b` (or `llama3.3:70b` if you have the VRAM) | text, tool calling | Meta's Llama 3.2, available in 1B and 3B sizes — the 3B fits comfortably on a student laptop and supports tool calling for agents |
+| `qwen2.5-coder:7b` | text, code | Solid coding model that fits in 8GB VRAM — useful if your agent needs a "coder" sub-agent or self-writes/debugs code |
+| `llama3.2-vision:11b` | image + text | The best multimodal model you can run locally in Ollama — handles OCR, chart interpretation, screenshots, and photo descriptions |
+| `nomic-embed-text` | text embeddings | A high-performing open embedding model with a large context window, and by far the embedding default in the current Ollama library — pairs with a local vector DB (Chroma/FAISS) for your RAG agent |
+| `gemma3:4b` (or `gemma3:12b` if VRAM allows) | text, image, document/OCR | Still strong on document, chart, and OCR work in a small footprint — good all-rounder when you don't have Google/Groq API access |
+
+Note: Ollama has no dedicated audio/speech model in its library today — if your project needs local audio, pair it with a separate local Whisper install (e.g. `faster-whisper`) rather than expecting it through `ollama run`.
+
+## Putting it together for agent projects
+Since you're building in VS Code, a practical intermediate project stack is: **LangGraph or CrewAI** for orchestration, **Gemini Flash or Groq's Llama 3.3 70B** as the main reasoning agent, **Ollama models** as free local fallback/dev-time testing, and **`gemini-embedding-2` or `nomic-embed-text`** for a RAG memory layer. A good intermediate deep-agent project: a document Q&A assistant that ingests PDFs (embeddings), answers via a fast model (Groq/Gemini Flash), escalates hard questions to a reasoning model (Gemini 3.1 Pro or gpt-oss-120b), and optionally takes voice input (Whisper).

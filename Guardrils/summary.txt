@@ -1,0 +1,22 @@
+Langchain -> Guardrails -> middelware
+
+1. PII middelware 
+    - Detect email_id,credit card, IP;s , url
+    - masking / hash
+    - I/p, O/p, tool calls
+
+2. Human In the loop
+    - pauses agents before sensitive tools
+    - Approve or reject
+    - threads and checkpointer
+
+3. Before Agent hook
+    - Runs before any LLM calls
+    - Zero cost for blocked requests
+    - then move to end state
+
+4. After Agent hook
+    - validates the final response before use sees.
+    - replace or mutate unsafe content
+
+5. Layered Guardrails            
